@@ -10,14 +10,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+// import lombok.AllArgsConstructor;
+// import lombok.Data;
+// import lombok.NoArgsConstructor;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
+// @NoArgsConstructor
+// @AllArgsConstructor
+// @Data
 @Table(name = "Inventory_In")
 public class StockInInventory {
 
@@ -35,6 +35,7 @@ public class StockInInventory {
 	private String recivedBy;
 	
 	private String recivedDate;
+
 	
 	private String totalQty;
 	
@@ -43,9 +44,102 @@ public class StockInInventory {
 	private String totalPrice;
 		
 	private Boolean isApproved;
+	private String OrderDate;
+	private String  OrderBy;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "stock_id",referencedColumnName = "stock_id")
 	private List<StockInventoryItem> stockInventoryItems;
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getFrom() {
+		return from;
+	}
+
+	public String getRecivedBy() {
+		return recivedBy;
+	}
+
+	public String getRecivedDate() {
+		return recivedDate;
+	}
+
+	public String getTotalQty() {
+		return totalQty;
+	}
+
+	public String getTotalProduct() {
+		return totalProduct;
+	}
+
+	public String getTotalPrice() {
+		return totalPrice;
+	}
+
+	public Boolean getIsApproved() {
+		return isApproved;
+	}
+
+	public String getOrderDate() {
+		return OrderDate;
+	}
+
+	public String getOrderBy() {
+		return OrderBy;
+	}
+
+	public List<StockInventoryItem> getStockInventoryItems() {
+		return stockInventoryItems;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setFrom(String from) {
+		this.from = from;
+	}
+
+	public void setRecivedBy(String recivedBy) {
+		this.recivedBy = recivedBy;
+	}
+
+	public void setRecivedDate(String recivedDate) {
+		this.recivedDate = recivedDate;
+	}
+
+	public void setTotalQty(String totalQty) {
+		this.totalQty = totalQty;
+	}
+
+	public void setTotalProduct(String totalProduct) {
+		this.totalProduct = totalProduct;
+	}
+
+	public void setTotalPrice(String totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public void setIsApproved(Boolean isApproved) {
+		this.isApproved = isApproved;
+	}
+
+	public void setOrderDate(String orderDate) {
+		OrderDate = orderDate;
+	}
+
+	public void setOrderBy(String orderBy) {
+		OrderBy = orderBy;
+	}
+
+	public void setStockInventoryItems(List<StockInventoryItem> stockInventoryItems) {
+		this.stockInventoryItems = stockInventoryItems;
+	}
+
+
+
 
 }

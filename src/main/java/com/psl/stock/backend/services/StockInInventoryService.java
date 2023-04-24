@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import com.psl.stock.backend.entities.StockInInventory;
@@ -28,8 +32,22 @@ public class StockInInventoryService {
 		
 	}
 	
-	public List<StockInInventory> getAll(){
-		return stockInInventoryRepo.findAll();
+	public Page<StockInInventory> getAll(int pageNo,int pageSize,String field,String sortDir){
+		System.out.println(pageNo);
+		System.out.println(pageSize);
+		System.out.println(field);
+		System.out.println(sortDir);
+Sort sort=null;
+        if (sortDir.equalsIgnoreCase("asc")) {
+		sort=Sort.by(field).ascending();
+		}
+		else{
+		sort=	Sort.by(field).descending();
+		}
+
+	Pageable p=	PageRequest.of(pageNo, pageSize,sort) ;
+		
+		return  stockInInventoryRepo.findAll(p);
 	}
 	
 	public StockInInventory getById(Long id) {
@@ -48,15 +66,6 @@ public class StockInInventoryService {
 	   return	this.stockInInventoryRepo.stockInventoryItemById(id);
 	}
 	
-//	public InventoryInResponse getAllInventoryInPagination(Integer pageNumber, Integer pageSize) {
-//		Pageable p = PageRequest.of(pageNumber, pageSize);
-//		Page<StockInInventory> pageVisitor = this.stockInInventoryRepo.findAll(p);
-//		List<StockInInventory> allInventortIn = pageVisitor.getContent();
-//		List<StockInInventory> stcockInInventories = allInventortIn.stream()
-//				.map(stock->this.stockInInventory(stock))
-//				.collect(Collectors.toList());
-//		InventoryInResponse visitorResponse = new InventoryInResponse();
-//		return InventoryInResponse;
-//	}
+
 	
 }

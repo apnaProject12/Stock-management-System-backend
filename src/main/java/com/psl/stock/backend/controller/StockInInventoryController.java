@@ -2,6 +2,7 @@ package com.psl.stock.backend.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.psl.stock.backend.entities.StockInInventory;
@@ -29,8 +31,8 @@ public class StockInInventoryController {
 	private final StockInInventoryService stockInInventoryService;
 	
 	@GetMapping("/inventory/item")
-	private List<StockInInventory> getAll(){
-		return stockInInventoryService.getAll();
+	public  ResponseEntity<Page<StockInInventory>> getAll(@RequestParam("pageNo")int pageNo,@RequestParam("pageSize")int pageSize,@RequestParam("field")String field,@RequestParam("sortDir")String sort ){
+		return new ResponseEntity<Page<StockInInventory>>(stockInInventoryService.getAll(pageNo, pageSize, field, sort),HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
