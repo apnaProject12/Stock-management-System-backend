@@ -9,23 +9,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class AddFromEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "logistic_id")
 	private Long id;
-	
+
 	@Column(name = "logistic_from")
 	private String from;
-	
+
 	// private String recivedBy;
-	
-//	private String productList;
+
+	// private String productList;
 
 }

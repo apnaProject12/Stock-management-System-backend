@@ -8,10 +8,10 @@ import com.psl.stock.backend.repositories.StockInventoryItemRepo;
 
 @Service
 public class StockInventoryItemService {
-	
+
 	@Autowired
 	private StockInventoryItemRepo stockInventoryItemRepo;
-	
+
 	public StockInventoryItem addOrUpdate(StockInventoryItem stockInventoryItem) {
 		return stockInventoryItemRepo.save(stockInventoryItem);
 	}
@@ -20,11 +20,11 @@ public class StockInventoryItemService {
 		stockInventoryItemRepo.deleteById(id);
 		return true;
 	}
-	
-	public List<StockInventoryItem> getAll(){
+
+	public List<StockInventoryItem> getAll() {
 		return stockInventoryItemRepo.findAll();
 	}
-	
+
 	public StockInventoryItem getById(Long id) {
 		return stockInventoryItemRepo.findById(id).get();
 	}

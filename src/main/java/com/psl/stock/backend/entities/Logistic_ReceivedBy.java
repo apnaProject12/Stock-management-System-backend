@@ -10,10 +10,12 @@ import lombok.Data;
 @Data
 @Entity
 public class Logistic_ReceivedBy {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "REceivedBy_Id")
     private int id;
+
     @Column(name = "Received_By")
     private String receiver;
 }

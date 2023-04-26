@@ -10,45 +10,38 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-// import lombok.AllArgsConstructor;
-// import lombok.Data;
-// import lombok.NoArgsConstructor;
+
 
 @Entity
-// @NoArgsConstructor
-// @AllArgsConstructor
-// @Data
 @Table(name = "Inventory_In")
 public class StockInInventory {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "stock_id")
 	private Long id;
-	
-	
+
 	@Column(name = "stock_from")
 	private String from;
-	
-	
+
 	private String recivedBy;
-	
+
 	private String recivedDate;
 
-	
 	private String totalQty;
-	
+
 	private String totalProduct;
-	
+
 	private String totalPrice;
-		
+
 	private Boolean isApproved;
+
 	private String OrderDate;
-	private String  OrderBy;
 	
+	private String OrderBy;
+
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "stock_id",referencedColumnName = "stock_id")
+	@JoinColumn(name = "stock_id", referencedColumnName = "stock_id")
 	private List<StockInventoryItem> stockInventoryItems;
 
 	public Long getId() {
@@ -138,8 +131,5 @@ public class StockInInventory {
 	public void setStockInventoryItems(List<StockInventoryItem> stockInventoryItems) {
 		this.stockInventoryItems = stockInventoryItems;
 	}
-
-
-
 
 }

@@ -22,32 +22,31 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("/StockInInventory")
 public class Logistics_From_Controller {
-	
+
 	private final LogisticsService logisticsService;
-	
+
 	@GetMapping("/logistics/gell")
-	private List<AddFromEntity> getAll(){
+	private List<AddFromEntity> getAll() {
 		return logisticsService.getAll();
 	}
-	
+
 	@GetMapping("/logistics/from/{id}")
 	private AddFromEntity getById(@PathVariable Long id) {
 		return logisticsService.getById(id);
 	}
-	
+
 	@PostMapping("/logistics/from/add")
 	private AddFromEntity addItem(@RequestBody AddFromEntity logisticsEntities) {
 		return logisticsService.addOrUpdate(logisticsEntities);
 	}
-	
+
 	@PutMapping("/logistics/from/{id}")
 	private AddFromEntity updateItem(@PathVariable Long id,
 			@RequestBody AddFromEntity logisticsEntities) {
 		logisticsEntities.setId(id);
 		return logisticsService.addOrUpdate(logisticsEntities);
 	}
-	
-	
+
 	@DeleteMapping("/logistics/from/{id}")
 	private void delete(@PathVariable Long id) {
 		logisticsService.deleteById(id);

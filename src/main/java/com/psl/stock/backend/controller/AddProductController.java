@@ -24,34 +24,32 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("/StockInInventory")
 public class AddProductController {
-	
-	
-private final AddProductService addProductService;
-	
+
+	private final AddProductService addProductService;
+
 	@GetMapping("/product-list/gell")
-	private List<AddProductEntities> getAll(){
+	private List<AddProductEntities> getAll() {
 		return addProductService.getAll();
 	}
-	
+
 	@GetMapping("/product-list/{id}")
 	private ResponseEntity<AddProductEntities> getById(@PathVariable Long id) {
 		// return addProductService.getById(id);
 		return new ResponseEntity<AddProductEntities>(this.addProductService.getById(id), HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/product-list/product")
 	private AddProductEntities addItem(@RequestBody AddProductEntities addProductEntities) {
 		return addProductService.addOrUpdate(addProductEntities);
 	}
-	
+
 	@PutMapping("/product-list/{id}")
 	private AddProductEntities updateItem(@PathVariable Long id,
 			@RequestBody AddProductEntities addProductEntities) {
 		addProductEntities.setId(id);
 		return addProductService.addOrUpdate(addProductEntities);
 	}
-	
-	
+
 	@DeleteMapping("/product-list/{id}")
 	private void delete(@PathVariable Long id) {
 		addProductService.deleteById(id);
