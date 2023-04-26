@@ -2,6 +2,8 @@ package com.psl.stock.backend.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,28 +22,29 @@ import lombok.AllArgsConstructor;
 @CrossOrigin
 @RestController
 @AllArgsConstructor
-@RequestMapping("/AddProduct")
+@RequestMapping("/StockInInventory")
 public class AddProductController {
 	
 	
 private final AddProductService addProductService;
 	
-	@GetMapping("/gell")
+	@GetMapping("/product-list/gell")
 	private List<AddProductEntities> getAll(){
 		return addProductService.getAll();
 	}
 	
-	@GetMapping("/{id}")
-	private AddProductEntities getById(@PathVariable Long id) {
-		return addProductService.getById(id);
+	@GetMapping("/product-list/{id}")
+	private ResponseEntity<AddProductEntities> getById(@PathVariable Long id) {
+		// return addProductService.getById(id);
+		return new ResponseEntity<AddProductEntities>(this.addProductService.getById(id), HttpStatus.OK);
 	}
 	
-	@PostMapping("/product")
+	@PostMapping("/product-list/product")
 	private AddProductEntities addItem(@RequestBody AddProductEntities addProductEntities) {
 		return addProductService.addOrUpdate(addProductEntities);
 	}
 	
-	@PutMapping("/{id}")
+	@PutMapping("/product-list/{id}")
 	private AddProductEntities updateItem(@PathVariable Long id,
 			@RequestBody AddProductEntities addProductEntities) {
 		addProductEntities.setId(id);
@@ -49,7 +52,7 @@ private final AddProductService addProductService;
 	}
 	
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/product-list/{id}")
 	private void delete(@PathVariable Long id) {
 		addProductService.deleteById(id);
 	}

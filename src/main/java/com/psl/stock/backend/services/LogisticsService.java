@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.psl.stock.backend.entities.LogisticsEntities;
+import com.psl.stock.backend.entities.AddFromEntity;
 import com.psl.stock.backend.repositories.LogisticsRepo;
 
 @Service
@@ -14,7 +14,7 @@ public class LogisticsService {
 	@Autowired
 	private LogisticsRepo logisticsRepo;
 	
-	public LogisticsEntities addOrUpdate(LogisticsEntities logisticsEntities) {
+	public AddFromEntity addOrUpdate(AddFromEntity logisticsEntities) {
 		return logisticsRepo.save(logisticsEntities);
 	}
 
@@ -25,11 +25,11 @@ public class LogisticsService {
 		
 	}
 	
-	public List<LogisticsEntities> getAll(){
+	public List<AddFromEntity> getAll(){
 		return logisticsRepo.findAll();
 	}
 	
-	public LogisticsEntities getById(Long id) {
+	public AddFromEntity getById(Long id) {
 		return logisticsRepo.findById(id).get();
 	
 	}

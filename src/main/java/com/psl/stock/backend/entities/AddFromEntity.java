@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class LogisticsEntities {
+public class AddFromEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,7 @@ public class LogisticsEntities {
 	@Column(name = "logistic_from")
 	private String from;
 	
-	private String recivedBy;
+	// private String recivedBy;
 	
 //	private String productList;
 

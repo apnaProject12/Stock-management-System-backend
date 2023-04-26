@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.psl.stock.backend.entities.LogisticsEntities;
+import com.psl.stock.backend.entities.AddFromEntity;
 import com.psl.stock.backend.services.LogisticsService;
 
 import lombok.AllArgsConstructor;
@@ -20,35 +20,35 @@ import lombok.AllArgsConstructor;
 @CrossOrigin
 @RestController
 @AllArgsConstructor
-@RequestMapping("/logistics")
-public class LogisticsController {
+@RequestMapping("/StockInInventory")
+public class Logistics_From_Controller {
 	
 	private final LogisticsService logisticsService;
 	
-	@GetMapping("/gell")
-	private List<LogisticsEntities> getAll(){
+	@GetMapping("/logistics/gell")
+	private List<AddFromEntity> getAll(){
 		return logisticsService.getAll();
 	}
 	
-	@GetMapping("/{id}")
-	private LogisticsEntities getById(@PathVariable Long id) {
+	@GetMapping("/logistics/from/{id}")
+	private AddFromEntity getById(@PathVariable Long id) {
 		return logisticsService.getById(id);
 	}
 	
-	@PostMapping("/add")
-	private LogisticsEntities addItem(@RequestBody LogisticsEntities logisticsEntities) {
+	@PostMapping("/logistics/from/add")
+	private AddFromEntity addItem(@RequestBody AddFromEntity logisticsEntities) {
 		return logisticsService.addOrUpdate(logisticsEntities);
 	}
 	
-	@PutMapping("/{id}")
-	private LogisticsEntities updateItem(@PathVariable Long id,
-			@RequestBody LogisticsEntities logisticsEntities) {
+	@PutMapping("/logistics/from/{id}")
+	private AddFromEntity updateItem(@PathVariable Long id,
+			@RequestBody AddFromEntity logisticsEntities) {
 		logisticsEntities.setId(id);
 		return logisticsService.addOrUpdate(logisticsEntities);
 	}
 	
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/logistics/from/{id}")
 	private void delete(@PathVariable Long id) {
 		logisticsService.deleteById(id);
 	}

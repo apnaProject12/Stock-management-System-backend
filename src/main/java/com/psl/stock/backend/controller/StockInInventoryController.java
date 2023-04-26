@@ -54,7 +54,7 @@ public class StockInInventoryController {
 	
 	
 	@DeleteMapping("/{id}")
-	private void delete(@PathVariable Long id) {
+	private void delete(@PathVariable Long id ) {
 		stockInInventoryService.deleteById(id);
 	}
 	
