@@ -9,6 +9,6 @@ public class PslStockBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PslStockBackendApplication.class, args);
 		System.out.println("-----started------");
-                System.out.println("Ram your project is started");
+                System.out.println("manvindar your project is started");
 	}
 }
