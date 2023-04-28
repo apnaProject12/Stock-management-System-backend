@@ -16,13 +16,12 @@ public class OrderIn {
 	@Column(name = "order_id")
 	private Long id; 
 
-    private String orderBy;
 
     private String totalProduct;
 
     private String totalQuentity;
 
-    private String orderDate;
+
 
     @OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "order_id", referencedColumnName = "order_id")

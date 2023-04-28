@@ -36,10 +36,6 @@ public class StockInInventory {
 
 	private Boolean isApproved;
 
-	private String OrderDate;
-	
-	private String OrderBy;
-
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "stock_id", referencedColumnName = "stock_id")
 	private List<StockInventoryItem> stockInventoryItems;
@@ -76,14 +72,7 @@ public class StockInInventory {
 		return isApproved;
 	}
 
-	public String getOrderDate() {
-		return OrderDate;
-	}
-
-	public String getOrderBy() {
-		return OrderBy;
-	}
-
+	
 	public List<StockInventoryItem> getStockInventoryItems() {
 		return stockInventoryItems;
 	}
@@ -118,14 +107,6 @@ public class StockInInventory {
 
 	public void setIsApproved(Boolean isApproved) {
 		this.isApproved = isApproved;
-	}
-
-	public void setOrderDate(String orderDate) {
-		OrderDate = orderDate;
-	}
-
-	public void setOrderBy(String orderBy) {
-		OrderBy = orderBy;
 	}
 
 	public void setStockInventoryItems(List<StockInventoryItem> stockInventoryItems) {

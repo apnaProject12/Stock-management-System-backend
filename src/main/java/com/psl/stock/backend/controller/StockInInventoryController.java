@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.psl.stock.backend.entities.Response;
 import com.psl.stock.backend.entities.StockInInventory;
 import com.psl.stock.backend.services.StockInInventoryService;
 
@@ -72,4 +73,16 @@ public class StockInInventoryController {
 		return new ResponseEntity<List<StockInInventory>>(this.stockInInventoryService.getItemById(id), HttpStatus.OK);
 	}
 
+	@GetMapping("/getProduct/approval")
+    public ResponseEntity<Response> getwithApproval(@RequestParam("id")Long id,@RequestParam("approval")boolean approval){
+         StockInInventory byId = this.stockInInventoryService.getById(id);
+         byId.setIsApproved(approval);
+        //  byId.getStockInventoryItems().get(index).setProductName(projectname);
+        boolean appro= this.stockInInventoryService.addOrUpdate(byId).getIsApproved();
+        if (appro) {
+            return new ResponseEntity<Response>(new Response("Approved successfully"),HttpStatus.ACCEPTED);
+        } else {
+            return new ResponseEntity<Response>(new Response("Approval unsuccessful"),HttpStatus.BAD_GATEWAY);
+        }
+    }
 }
