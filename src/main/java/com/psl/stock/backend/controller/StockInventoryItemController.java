@@ -1,8 +1,11 @@
 package com.psl.stock.backend.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.psl.stock.backend.entities.StockInventoryItem;
 import com.psl.stock.backend.services.StockInventoryItemService;
@@ -48,6 +52,14 @@ public class StockInventoryItemController {
 	@DeleteMapping("/{id}")
 	private void delete(@PathVariable Long id) {
 		stockInventoryItemService.deleteById(id);
+	}
+	@GetMapping("/getProductWithtotal")
+	// public ResponseEntity<List<Map<String,Number>>> getProductwithtotal(){
+	// 	return new ResponseEntity<List<Map<String,Number>>>(this.stockInventoryItemService.getProductwithTotal(),HttpStatus.ACCEPTED);
+	// }
+	public int totalProduct(@RequestParam("product")String product) {
+		System.out.println(product);
+		return this.stockInventoryItemService.getTotalProduct(product);
 	}
 
 }

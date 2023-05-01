@@ -4,28 +4,19 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-@Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-@Table(name = "Inventory_Item")
-public class StockInventoryItem {
+@Entity
+public class Inventory {
+    @Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String productName;
+    private Long productQty;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long productId;
-
-	
-	private String productQty;
-	
-	private String price;
-	
-	private String totalPrice;
-	
-	private String productName;
+    
 }

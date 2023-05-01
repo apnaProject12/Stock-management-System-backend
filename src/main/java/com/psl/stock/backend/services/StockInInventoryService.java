@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import com.psl.stock.backend.entities.StockInInventory;
+import com.psl.stock.backend.entities.StockInventoryItem;
 import com.psl.stock.backend.repositories.StockInInventoryRepo;
 
 @Service
@@ -23,6 +24,10 @@ public class StockInInventoryService {
 	private StockInInventoryRepo stockInInventoryRepo;
 
 	public StockInInventory addOrUpdate(StockInInventory stockInInventory) {
+	List<StockInventoryItem> data=	stockInInventory.getStockInventoryItems();
+	for (StockInventoryItem value : data) {
+		System.out.println(value.getProductName());
+	}
 		return stockInInventoryRepo.save(stockInInventory);
 	}
 

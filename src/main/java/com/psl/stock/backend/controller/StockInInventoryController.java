@@ -1,7 +1,9 @@
 package com.psl.stock.backend.controller;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.psl.stock.backend.entities.Inventory;
 import com.psl.stock.backend.entities.Response;
 import com.psl.stock.backend.entities.StockInInventory;
+import com.psl.stock.backend.entities.StockInventoryItem;
 import com.psl.stock.backend.services.StockInInventoryService;
+import com.psl.stock.backend.services.StockInventoryItemService;
+import com.psl.stock.backend.services.inventoryService;
 
 import lombok.AllArgsConstructor;
 
@@ -27,8 +33,14 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("/StockInInventory")
 public class StockInInventoryController {
-
+    @Autowired
 	private final StockInInventoryService stockInInventoryService;
+
+	@Autowired 
+	private StockInventoryItemService stockInventoryItemService;
+
+	@Autowired
+	private inventoryService inventoryService;
 
 	@GetMapping("/inventory/item")
 	public ResponseEntity<Page<StockInInventory>> getAll(@RequestParam("pageNo") int pageNo,
@@ -77,9 +89,18 @@ public class StockInInventoryController {
     public ResponseEntity<Response> getwithApproval(@RequestParam("id")Long id,@RequestParam("approval")boolean approval){
          StockInInventory byId = this.stockInInventoryService.getById(id);
          byId.setIsApproved(approval);
-        //  byId.getStockInventoryItems().get(index).setProductName(projectname);
-        boolean appro= this.stockInInventoryService.addOrUpdate(byId).getIsApproved();
+	StockInInventory stockInInventory=	this.stockInInventoryService.addOrUpdate(byId);
+	 boolean appro= stockInInventory.getIsApproved();
         if (appro) {
+			long productValue;
+           for (StockInventoryItem item : stockInInventory.getStockInventoryItems()) {
+			 productValue=this.stockInventoryItemService.getTotalProduct(item.getProductName());
+			Optional<Inventory> inventory= this.inventoryService.InvertoryByProductName(item.getProductName());
+			inventory.get().setProductQty(productValue);
+			this.inventoryService.updateProductQuantity(inventory);;
+			
+		   }
+
             return new ResponseEntity<Response>(new Response("Approved successfully"),HttpStatus.ACCEPTED);
         } else {
             return new ResponseEntity<Response>(new Response("Approval unsuccessful"),HttpStatus.BAD_GATEWAY);
