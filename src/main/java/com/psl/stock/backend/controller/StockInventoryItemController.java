@@ -19,20 +19,20 @@ import org.springframework.web.bind.annotation.RestController;
 import com.psl.stock.backend.entities.StockInventoryItem;
 import com.psl.stock.backend.services.StockInventoryItemService;
 
-@CrossOrigin
+// @CrossOrigin
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/StockInInventory")
 public class StockInventoryItemController {
 
 	@Autowired
 	private StockInventoryItemService stockInventoryItemService;
 
-	@GetMapping("/inventory/item")
+	@GetMapping("/inventory/get/item")
 	private List<StockInventoryItem> getAll() {
 		return stockInventoryItemService.getAll();
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/getById/{id}")
 	private StockInventoryItem getById(@PathVariable Long id) {
 		return stockInventoryItemService.getById(id);
 	}
@@ -42,14 +42,14 @@ public class StockInventoryItemController {
 		return stockInventoryItemService.addOrUpdate(stockInventoryItem);
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping("/addById/{id}")
 	private StockInventoryItem updateItem(@PathVariable Long id,
 			@RequestBody StockInventoryItem stockInventoryItem) {
 		stockInventoryItem.setProductId(id);
 		return stockInventoryItemService.addOrUpdate(stockInventoryItem);
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/delete/{id}")
 	private void delete(@PathVariable Long id) {
 		stockInventoryItemService.deleteById(id);
 	}

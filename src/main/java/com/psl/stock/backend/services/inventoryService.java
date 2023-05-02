@@ -27,5 +27,10 @@ public class inventoryService {
         this.inventoryRepo.save(inventory.get());
     }
 
+    public List<Inventory> searchInventory(String productName,int productQty) {
+        System.out.println(productName+" esrdtyguijokpjhgfdxghjkl;kjhgfghjkjhgf");
+        return this.inventoryRepo.searchInverntory(productName, productQty);
+    }
+
     
 }

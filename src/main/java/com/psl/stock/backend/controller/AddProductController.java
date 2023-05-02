@@ -19,7 +19,7 @@ import com.psl.stock.backend.services.AddProductService;
 
 import lombok.AllArgsConstructor;
 
-@CrossOrigin
+// @CrossOrigin
 @RestController
 @AllArgsConstructor
 @RequestMapping("/StockInInventory")

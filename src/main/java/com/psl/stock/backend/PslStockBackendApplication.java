@@ -8,6 +8,6 @@ public class PslStockBackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PslStockBackendApplication.class, args);
-		System.out.println("Nitish kumar singh your project is started.......");
+		System.out.println("ER Nitish kumar singh  your project is started.......");
 	}
 }

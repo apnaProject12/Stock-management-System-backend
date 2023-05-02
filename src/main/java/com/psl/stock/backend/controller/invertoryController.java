@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.psl.stock.backend.entities.Inventory;
@@ -36,6 +37,12 @@ public class invertoryController {
     @GetMapping("/Inventory/findByProductName/{product}")
     public ResponseEntity<Optional<Inventory>> productByName(@PathVariable("product")String product) {
         return new ResponseEntity<Optional<Inventory>>(this.inventoryService.InvertoryByProductName(product),HttpStatus.OK);
+    }
+
+    @GetMapping("/Inventory/AdvanceSearch")
+    public ResponseEntity<List<Inventory>> InventorySearch(@RequestParam("product") String productName,@RequestParam("productQty") int productQty) {
+        System.out.println(productName);
+        return new ResponseEntity<List<Inventory>>(this.inventoryService.searchInventory(productName, productQty),HttpStatus.OK);
     }
     
 }
