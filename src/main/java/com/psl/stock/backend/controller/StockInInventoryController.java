@@ -26,15 +26,16 @@ import com.psl.stock.backend.services.StockInInventoryService;
 import com.psl.stock.backend.services.StockInventoryItemService;
 import com.psl.stock.backend.services.inventoryService;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 // @CrossOrigin
 @RestController
-@AllArgsConstructor
+
 @RequestMapping("/StockInInventory")
 public class StockInInventoryController {
     @Autowired
-	private final StockInInventoryService stockInInventoryService;
+	private  StockInInventoryService stockInInventoryService;
 
 	@Autowired 
 	private StockInventoryItemService stockInventoryItemService;
@@ -56,8 +57,17 @@ public class StockInInventoryController {
 	}
 
 	@PostMapping("/add/inventory")
-	private StockInInventory addItem(@RequestBody StockInInventory stockInInventory) {
-		return stockInInventoryService.addOrUpdate(stockInInventory);
+	public ResponseEntity<Response> addItem(@Valid @RequestBody StockInInventory stockInInventory) {
+	StockInInventory s=	stockInInventoryService.addOrUpdate(stockInInventory);
+		if (s!=null) {
+			return new ResponseEntity<Response>(new Response("Stock Inventory add successfully created successfully"), HttpStatus.CREATED);
+		}
+		else{ 
+			return new ResponseEntity<Response>(new Response("Something went wrong"), HttpStatus.CREATED);
+			
+			
+		}
+		
 	}
 
 	@PutMapping("/{id}")
@@ -107,3 +117,4 @@ public class StockInInventoryController {
         }
     }
 }
+

@@ -1,6 +1,9 @@
 package com.psl.stock.backend.entities;
 
 import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,9 +13,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "Inventory_In")
 public class StockInInventory {
 
@@ -22,14 +33,16 @@ public class StockInInventory {
 	private Long id;
 
 	@Column(name = "stock_from")
+	@NotBlank(message = "from is required")
 	private String from;
-
+	@NotBlank(message = "receivedBy is required")
 	private String recivedBy;
-
+	@NotNull(message = "Receiving Date is required")
 	private String recivedDate;
-
-	private String totalQty;
-
+	@Positive(message = "total Qty must be greater than 0")
+	@NotNull(message = "receivedBy is required")
+	private int  totalQty;
+    @Positive(message = "total product must be greater than 0")
 	private String totalProduct;
 
 	private String totalPrice;
@@ -40,77 +53,5 @@ public class StockInInventory {
 	@JoinColumn(name = "stock_id", referencedColumnName = "stock_id")
 	private List<StockInventoryItem> stockInventoryItems;
 
-	public Long getId() {
-		return id;
-	}
-
-	public String getFrom() {
-		return from;
-	}
-
-	public String getRecivedBy() {
-		return recivedBy;
-	}
-
-	public String getRecivedDate() {
-		return recivedDate;
-	}
-
-	public String getTotalQty() {
-		return totalQty;
-	}
-
-	public String getTotalProduct() {
-		return totalProduct;
-	}
-
-	public String getTotalPrice() {
-		return totalPrice;
-	}
-
-	public Boolean getIsApproved() {
-		return isApproved;
-	}
-
-	
-	public List<StockInventoryItem> getStockInventoryItems() {
-		return stockInventoryItems;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public void setFrom(String from) {
-		this.from = from;
-	}
-
-	public void setRecivedBy(String recivedBy) {
-		this.recivedBy = recivedBy;
-	}
-
-	public void setRecivedDate(String recivedDate) {
-		this.recivedDate = recivedDate;
-	}
-
-	public void setTotalQty(String totalQty) {
-		this.totalQty = totalQty;
-	}
-
-	public void setTotalProduct(String totalProduct) {
-		this.totalProduct = totalProduct;
-	}
-
-	public void setTotalPrice(String totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-
-	public void setIsApproved(Boolean isApproved) {
-		this.isApproved = isApproved;
-	}
-
-	public void setStockInventoryItems(List<StockInventoryItem> stockInventoryItems) {
-		this.stockInventoryItems = stockInventoryItems;
-	}
 
 }

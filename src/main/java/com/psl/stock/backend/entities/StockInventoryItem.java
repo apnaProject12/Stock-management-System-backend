@@ -5,6 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,13 +22,15 @@ public class StockInventoryItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long productId;
-
-	
-	private String productQty;
-	
-	private String price;
-	
-	private String totalPrice;
-	
+	@NotNull(message = "product Qty is required")
+	@Positive(message = "product Qty must be greater than 0")
+	private int productQty;
+	@NotNull(message = "price is required")
+	@Positive(message = "price must be greater than 0")
+	private Long price;
+	@NotNull(message = "total price  is required")
+	@Positive(message = "total price must be greater than 0")
+	private Long totalPrice;
+	@NotNull(message = "product Name is required")
 	private String productName;
 }
