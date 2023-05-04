@@ -23,12 +23,11 @@ public class InventoryOutItem {
     private Long id;
 
     @Column(name="OutItem_pname")
-    @NotBlank(message = "product name From is required")
+   
     private String productName;
     
     @Column(name="OutItem_totalQty")
-    @Positive(message = "total Qty must be greater than 0")
-    @NotNull(message = "total Qty  is required")
+   
     private int totalQty;
    
 
