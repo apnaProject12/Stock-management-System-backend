@@ -58,7 +58,21 @@ public class StockInInventoryController {
 
 	@PostMapping("/add/inventory")
 	public ResponseEntity<Response> addItem(@Valid @RequestBody StockInInventory stockInInventory) {
+
+		for (StockInventoryItem inItem : stockInInventory.getStockInventoryItems()) {
+		  if (inItem.getProductName() ==null || inItem.getProductName()==" " ) {
+			return new ResponseEntity<Response>(new Response("product name must be required"),HttpStatus.BAD_REQUEST);
+		  }
+		  if ( inItem.getProductQty() <=0 ) {
+			return new ResponseEntity<Response>(new Response("product quentity must be greater than 0"),HttpStatus.BAD_REQUEST);
+		  }
+		  if ( inItem.getPrice() <=0 ) {
+			return new ResponseEntity<Response>(new Response("product prices must be greater than 0"),HttpStatus.BAD_REQUEST);
+		  }
+		}
+
 	StockInInventory s=	stockInInventoryService.addOrUpdate(stockInInventory);
+
 		if (s!=null) {
 			return new ResponseEntity<Response>(new Response("Stock Inventory add successfully created successfully"), HttpStatus.CREATED);
 		}
