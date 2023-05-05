@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.psl.stock.backend.entities.Inventory;
+import com.psl.stock.backend.entities.Response;
 import com.psl.stock.backend.services.inventoryService;
 
 @RestController
@@ -26,8 +27,22 @@ public class invertoryController {
     @Autowired
     inventoryService inventoryService;
     @PostMapping("/addInventory")
-    public ResponseEntity<Inventory> addInventory(@RequestBody Inventory inventory) {
-        return new ResponseEntity<Inventory>(this.inventoryService.addInvertory(inventory),HttpStatus.OK);
+    public ResponseEntity<Response> addInventory(@RequestBody Inventory inventory) {
+        
+
+        
+        System.out.println("inventory out : "+inventory.getProductName());
+     int   count=0;
+      for (Inventory element : this.inventoryService.getAllInventory()) {
+        System.out.println(element.getProductName());
+        if (element.getProductName().equalsIgnoreCase(inventory.getProductName())) {
+            return new ResponseEntity<Response>(new Response("data alreadty exist"),HttpStatus.OK);
+        }
+        
+      }
+      this.inventoryService.addInvertory(inventory);
+        return new ResponseEntity<Response>(new Response("Item added successfully"),HttpStatus.OK);
+        
     }
     
     @GetMapping("/findAllInventory")

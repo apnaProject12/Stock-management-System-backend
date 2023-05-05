@@ -60,7 +60,7 @@ public class StockInInventoryController {
 	public ResponseEntity<Response> addItem(@Valid @RequestBody StockInInventory stockInInventory) {
 
 		for (StockInventoryItem inItem : stockInInventory.getStockInventoryItems()) {
-		  if (inItem.getProductName() ==null || inItem.getProductName()==" " ) {
+		  if (inItem.getProductName()==null || inItem.getProductName()=="" ) {
 			return new ResponseEntity<Response>(new Response("product name must be required"),HttpStatus.BAD_REQUEST);
 		  }
 		  if ( inItem.getProductQty() <=0 ) {
@@ -91,9 +91,10 @@ public class StockInInventoryController {
 		return stockInInventoryService.addOrUpdate(stockInInventory);
 	}
 
-	@DeleteMapping("/{id}")
-	private void delete(@PathVariable Long id) {
-		stockInInventoryService.deleteById(id);
+	@DeleteMapping("/StockIn/deleteData/{id}")
+	private ResponseEntity<Response> delete(@PathVariable Long id) throws Exception {
+		this.stockInInventoryService.deleteById(id);
+		return new ResponseEntity<Response>(new Response("data deleted successfully"),HttpStatus.OK);
 	}
 
 	// @GetMapping("{id}/getproduct")

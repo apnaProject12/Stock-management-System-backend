@@ -31,9 +31,10 @@ public class StockInInventoryService {
 		return stockInInventoryRepo.save(stockInInventory);
 	}
 
-	public boolean deleteById(Long id) {
+	public void deleteById(Long id) throws Exception {
+		this.stockInInventoryRepo.findById(id).orElseThrow(()->new Exception("id not found"));
 		stockInInventoryRepo.deleteById(id);
-		return true;
+	
 
 	}
 
