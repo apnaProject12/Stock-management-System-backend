@@ -5,6 +5,10 @@ import java.util.stream.Collectors;
 
 // import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.psl.stock.backend.entities.InventoryOut;
@@ -24,12 +28,31 @@ public class InventoryOutService {
   return  this.repo.findAll().stream().map(e->e.getInventoryOutItem()).collect(Collectors.toList());
         
     }
-    public List<InventoryOut> getOutList() {
-      return  this.repo.findAll();
+    public Page<InventoryOut> getOutList(int pageNo, int pageSize, String field, String sortDir) {
+
+        Sort sort = null;
+		if (sortDir.equalsIgnoreCase("asc")) {
+			sort = Sort.by(field).ascending();
+		} else {
+			sort = Sort.by(field).descending();
+		}
+
+		Pageable p = PageRequest.of(pageNo, pageSize, sort);
+
+		return this.repo.findAll(p);
     }
 
     public   List<InventoryOutItem> findOutItemByFrom(Long id) {
       return this.repo.findById(id).get().getInventoryOutItem();
+    }
+    public void deleteAllOut(long id) throws Exception {
+        this.repo.findById(id).orElseThrow(()->new Exception("id not found "+id));
+        this.repo.deleteById(id);
+   
+      
+    }
+    public InventoryOut findInventoryOutById(long id) throws Exception{
+    return  this.repo.findById(id).orElseThrow(()-> new Exception("id not found "+id));
     }
 
     
