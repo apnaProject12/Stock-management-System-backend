@@ -28,7 +28,7 @@ public class inventoryService {
     }
 
     public List<Inventory> searchInventory(String productName,int productQty) {
-        System.out.println(productName+" esrdtyguijokpjhgfdxghjkl;kjhgfghjkjhgf");
+        System.out.println("bdjcdc");
         return this.inventoryRepo.searchInverntory(productName, productQty);
     }
 
