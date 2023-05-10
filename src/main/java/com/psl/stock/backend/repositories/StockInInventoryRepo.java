@@ -13,4 +13,6 @@ public interface StockInInventoryRepo extends JpaRepository<StockInInventory, Lo
 
 	@Query(value = "SELECT * FROM inventory_item p JOIN `inventory_in` i ON p.`stock_id`=i.`stock_id` WHERE i.stock_id=:id", nativeQuery = true)
 	public List<StockInInventory> stockInventoryItemById(Long id);
+// 	@Query(value = "SELECT * FROM inventory_item p JOIN `inventory_in` i ON p.`stock_id`=i.`stock_id` WHERE i.stock_id=:id", nativeQuery = true)
+// 	public List<StockInInventory> stockInventoryItemById(Long id);
 }

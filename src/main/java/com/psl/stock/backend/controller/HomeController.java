@@ -107,9 +107,7 @@ public class HomeController {
 		if(findEmailpassword ==null) {
 			
 			Admin savaAll = this.adminService.savaAll(admin);
-			savaAll.setRole("ROLE_ADMIN");
-			int id=savaAll.getId();
-			Admin saveById = this.adminService.saveById(id, admin);
+		
 			
 			Response tokenResponse=new Response("Data inserted Successfully");
 			
@@ -140,7 +138,7 @@ public class HomeController {
 				
 				 String generateToken = jwtService.generateToken(login.getUsername());
 				 System.out.println("token return :"+generateToken);
-				 return new ResponseEntity<Response>((new Response("login Successfully  "+ generateToken)),HttpStatus.OK);
+				 return new ResponseEntity<Response>((new Response( generateToken)),HttpStatus.OK);
 			}else {
 				Response tokenResponse=new Response();
 				System.out.println("user not found");
