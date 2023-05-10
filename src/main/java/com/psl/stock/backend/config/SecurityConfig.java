@@ -53,7 +53,7 @@ public class SecurityConfig{
 		csrf().
 		disable().
 		authorizeHttpRequests().
-		requestMatchers("/api/security/authenticate","/api/security/updatenew","/api/security/addAdmin","/api/security/download/excel","/api/security/OtpsendwithEmail","/api/security/resetPassword","/api/security/Otpsend").
+		requestMatchers("/StockInInventory/api/security/authenticate","/StockInInventory/api/security/updatenew","/StockInInventory/api/security/addAdmin","/StockInInventory/api/security/resetPassword").
 		permitAll().
 		anyRequest().
 		authenticated().

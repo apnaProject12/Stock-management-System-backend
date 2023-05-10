@@ -31,7 +31,7 @@ import com.psl.stock.backend.services.JwtService;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api/security")
+@RequestMapping("/StockInInventory/api/security")
 public class HomeController {
 	@Autowired
 	private com.psl.stock.backend.services.UserService userService;

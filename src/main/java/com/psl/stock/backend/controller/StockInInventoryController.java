@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -109,8 +110,8 @@ public class StockInInventoryController {
 		System.out.println(id);
 		return new ResponseEntity<List<StockInInventory>>(this.stockInInventoryService.getItemById(id), HttpStatus.OK);
 	}
-
 	@GetMapping("/getProduct/approval")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Response> getwithApproval(@RequestParam("id")Long id,@RequestParam("approval")boolean approval){
          StockInInventory byId = this.stockInInventoryService.getById(id);
          byId.setIsApproved(approval);
