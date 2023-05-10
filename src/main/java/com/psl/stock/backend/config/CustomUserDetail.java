@@ -1,10 +1,7 @@
  package com.psl.stock.backend.config;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,7 +14,7 @@ public class CustomUserDetail implements UserDetails{
 //	private String password;
 //	private String role;
 	User user;
-	private List<GrantedAuthority> authorities;
+	// private List<GrantedAuthority> authorities;
 	
 	public  CustomUserDetail(User user) {
 		System.out.println("custom user details class start");

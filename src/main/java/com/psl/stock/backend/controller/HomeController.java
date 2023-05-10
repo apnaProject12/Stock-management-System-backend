@@ -10,16 +10,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-//import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.psl.stock.backend.entities.Admin;
@@ -30,7 +25,6 @@ import com.psl.stock.backend.services.AdminService;
 import com.psl.stock.backend.services.JwtService;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/StockInInventory/api/security")
 public class HomeController {
 	@Autowired
@@ -85,8 +79,8 @@ public class HomeController {
 			
 			User savaAll = this.userService.savaAll(user);
 			savaAll.setRole("ROLE_USER");
-			int id=savaAll.getId();
-			User saveById = this.userService.saveById(id, user);
+			// int id=savaAll.getId();
+			// User saveById = this.userService.saveById(id, user);
 			
 			Response tokenResponse=new Response("Data inserted Successfully");
 			
@@ -108,8 +102,8 @@ public class HomeController {
 			
 			Admin savaAll = this.adminService.savaAll(admin);
 			savaAll.setRole("ROLE_ADMIN");
-			int id=savaAll.getId();
-			Admin saveById = this.adminService.saveById(id, admin);
+			// int id=savaAll.getId();
+			// Admin saveById = this.adminService.saveById(id, admin);
 			
 			Response tokenResponse=new Response("Data inserted Successfully");
 			
@@ -133,14 +127,14 @@ public class HomeController {
 	public ResponseEntity<Response> generateToken(@RequestBody Login login) {
 		System.out.println("generate token");
 		User findname = this.userService.findname(login.getUsername());
-		String role=findname.getRole();
+		// String role=findname.getRole();
 		if(findname !=null) {
 		Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login.getUsername(), login.getPassword()));
 			if(authenticate.isAuthenticated()) {
 				
 				 String generateToken = jwtService.generateToken(login.getUsername());
 				 System.out.println("token return :"+generateToken);
-				 return new ResponseEntity<Response>((new Response("login Successfully  "+ generateToken)),HttpStatus.OK);
+				 return new ResponseEntity<Response>((new Response(generateToken)),HttpStatus.OK);
 			}else {
 				Response tokenResponse=new Response();
 				System.out.println("user not found");
@@ -162,7 +156,7 @@ public class HomeController {
 		
 		if(findEmailpassword !=null) {
 			findEmailpassword.setPassword(password);
-			User savaAll = this.userService.savaAll(findEmailpassword);
+			// User savaAll = this.userService.savaAll(findEmailpassword);
 			return new ResponseEntity<Response>(new Response("password updated successfully"),HttpStatus.OK);
 			
 		}

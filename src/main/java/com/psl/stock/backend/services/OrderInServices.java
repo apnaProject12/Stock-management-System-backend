@@ -1,16 +1,16 @@
 package com.psl.stock.backend.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.stereotype.Service;
 
-import com.psl.stock.backend.repositories.OrderInRepo;
+// import com.psl.stock.backend.repositories.OrderInRepo;
 
-@Service
-public class OrderInServices {
+// @Service
+// public class OrderInServices {
 
-    @Autowired
-    private OrderInRepo orderInRepo;
+//     @Autowired
+//     private OrderInRepo orderInRepo;
 
     
     
-}
+// }

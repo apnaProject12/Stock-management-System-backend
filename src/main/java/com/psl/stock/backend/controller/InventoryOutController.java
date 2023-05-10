@@ -34,8 +34,6 @@ private InventoryOutService service;
 @Autowired
 private inventoryService service2;
 
-private Exception exception;
-
 @PostMapping("InventoryOut/addData")
     public ResponseEntity<Response>  adddata(@Valid @RequestBody InventoryOut inventoryOut) throws Exception{
     List<InventoryOutItem> item= inventoryOut.getInventoryOutItem();

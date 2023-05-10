@@ -11,10 +11,6 @@ import javax.crypto.SecretKey;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-//import javax.crypto.SecretKey;
-
-import org.springframework.stereotype.Service;
-
 import io.jsonwebtoken.Claims;
 
 //import org.springframework.core.codec.Decoder;

@@ -1,9 +1,6 @@
 package com.psl.stock.backend.entities;
 
 import java.util.List;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
