@@ -31,6 +31,10 @@ public class inventoryService {
         System.out.println("bdjcdc");
         return this.inventoryRepo.searchInverntory(productName, productQty);
     }
+    public void deleteInventory(long id) throws Exception {
+        this.inventoryRepo.findById(id).orElseThrow(()->new Exception("id not present"));
+        this.inventoryRepo.deleteById(id);
+    }
 
     
 }
