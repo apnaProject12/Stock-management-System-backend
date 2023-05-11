@@ -149,6 +149,7 @@ public class HomeController {
 				Response tokenResponse=new Response();
 				System.out.println("user not found");
 				tokenResponse.setMessage("invalid user id and password");
+				System.out.println("this is home");
 				
 				throw new UsernameNotFoundException(tokenResponse.getMessage());
 			}
