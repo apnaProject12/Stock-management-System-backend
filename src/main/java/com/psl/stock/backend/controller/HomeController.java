@@ -26,6 +26,7 @@ import com.psl.stock.backend.entities.Admin;
 import com.psl.stock.backend.entities.Login;
 import com.psl.stock.backend.entities.Response;
 import com.psl.stock.backend.entities.User;
+import com.psl.stock.backend.entities.loginResponse;
 import com.psl.stock.backend.services.AdminService;
 import com.psl.stock.backend.services.JwtService;
 
@@ -128,17 +129,22 @@ public class HomeController {
 	}
 	
 	@PostMapping("/authenticate")
-	public ResponseEntity<Response> generateToken(@RequestBody Login login) {
+	public ResponseEntity<?> generateToken(@RequestBody Login login) {
 		System.out.println("generate token");
 		User findname = this.userService.findname(login.getUsername());
-		String role=findname.getRole();
+		loginResponse loginresponse=new loginResponse();
+		loginresponse.setUser(findname.getName());
+		loginresponse.setRole(findname.getRole());
+		loginresponse.setMessage("login Successfully");
+	
 		if(findname !=null) {
 		Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login.getUsername(), login.getPassword()));
 			if(authenticate.isAuthenticated()) {
 				
 				 String generateToken = jwtService.generateToken(login.getUsername());
 				 System.out.println("token return :"+generateToken);
-				 return new ResponseEntity<Response>((new Response( generateToken)),HttpStatus.OK);
+				 loginresponse.setToken(generateToken);
+				 return new ResponseEntity<loginResponse>(loginresponse,HttpStatus.OK);
 			}else {
 				Response tokenResponse=new Response();
 				System.out.println("user not found");
