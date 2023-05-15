@@ -157,21 +157,9 @@ public class HomeController {
 			
 		
 	}
-	@PostMapping("/resetPassword")
-	public ResponseEntity<Response> updatePassword(@RequestParam("email")String email,@RequestParam("password")String password){
-		User findEmailpassword = this.userService.findEmail(email);
-		System.out.println(findEmailpassword);
-		
-		if(findEmailpassword !=null) {
-			findEmailpassword.setPassword(password);
-			User savaAll = this.userService.savaAll(findEmailpassword);
-			return new ResponseEntity<Response>(new Response("password updated successfully"),HttpStatus.OK);
-			
-		}
-		else {
-		return	new ResponseEntity<Response>(new Response("Bad credentials"),HttpStatus.OK);
-		}
-		
+	@GetMapping("/resetPassword")
+	public ResponseEntity<Response> updatePassword(@RequestParam("email")String email,@RequestParam("phone")Long phone ,@RequestParam("password")String password) throws Exception{
+		return new ResponseEntity<Response>(this.userService.forgetPassword(password, phone, email),HttpStatus.OK);
 	}
 	
 	@GetMapping("/getAllUser")

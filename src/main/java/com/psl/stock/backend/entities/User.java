@@ -65,9 +65,7 @@ public class User {
 	public void setPhone(long phone) {
 		this.phone = phone;
 	}
-    public User orElseThrow(Object object) {
-        return null;
-    }
+   
 	
 	
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.psl.stock.backend.entities.Response;
 import com.psl.stock.backend.entities.User;
 import com.psl.stock.backend.repositories.UserRepository;
 
@@ -65,6 +66,11 @@ public class UserService {
 	}
 	public List<User> getAllUser() {
 		return this.userRepository.findAll();
+	}
+	public Response forgetPassword(String password,Long phone,String email) throws Exception{
+	User user=this.userRepository.findByEmailAndPhone(email, phone).orElseThrow(()->new Exception("user not exist"));
+	user.setPassword(passwordEncoder.encode(password));
+	return new Response("password updated Successfully");
 	}
 	
 }
