@@ -63,5 +63,8 @@ public class UserService {
 	System.out.println(userpassword1);
 	return userpassword1;
 	}
+	public List<User> getAllUser() {
+		return this.userRepository.findAll();
+	}
 	
 }

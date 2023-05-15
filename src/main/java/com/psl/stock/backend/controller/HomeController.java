@@ -29,13 +29,14 @@ import com.psl.stock.backend.entities.User;
 import com.psl.stock.backend.entities.loginResponse;
 import com.psl.stock.backend.services.AdminService;
 import com.psl.stock.backend.services.JwtService;
+import com.psl.stock.backend.services.UserService;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/StockInInventory/api/security")
 public class HomeController {
 	@Autowired
-	private com.psl.stock.backend.services.UserService userService;
+	private UserService userService;
 	
 	@Autowired
 	private JwtService jwtService;
@@ -85,10 +86,6 @@ public class HomeController {
 		if(findEmailpassword ==null) {
 			
 			User savaAll = this.userService.savaAll(user);
-			savaAll.setRole("ROLE_USER");
-			int id=savaAll.getId();
-			User saveById = this.userService.saveById(id, user);
-			
 			Response tokenResponse=new Response("Data inserted Successfully");
 			
 			return new ResponseEntity<Response>(tokenResponse,HttpStatus.OK);
@@ -175,6 +172,12 @@ public class HomeController {
 		return	new ResponseEntity<Response>(new Response("Bad credentials"),HttpStatus.OK);
 		}
 		
+	}
+	
+	@GetMapping("/getAllUser")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	public ResponseEntity<List<User>> getAllUser() {
+		return new ResponseEntity<List<User>>(this.userService.getAllUser(),HttpStatus.OK);
 	}
 	
 	

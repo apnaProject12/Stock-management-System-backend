@@ -3,6 +3,8 @@ package com.psl.stock.backend.services;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -55,8 +57,9 @@ public class StockInInventoryService {
 		return stockInInventoryRepo.findAll(p);
 	}
 
-	public StockInInventory getById(Long id) {
-		return stockInInventoryRepo.findById(id).get();
+	
+	public StockInInventory getById(Long id) throws Exception {
+		return stockInInventoryRepo.findById(id).orElseThrow(()->new Exception("id not present"));
 
 	}
 
@@ -69,8 +72,6 @@ public class StockInInventoryService {
 				_params);
 	}
 
-	public List<StockInInventory> getItemById(Long id) {
-		return this.stockInInventoryRepo.stockInventoryItemById(id);
-	}
+	
 
 }

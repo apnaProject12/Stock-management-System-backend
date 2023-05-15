@@ -52,8 +52,8 @@ public class StockInInventoryController {
 				HttpStatus.OK);
 	}
 
-	@GetMapping("/{id}")
-	private StockInInventory getById(@PathVariable Long id) {
+	@GetMapping("/findInventoryIn/data/{id}")
+	private StockInInventory getById(@PathVariable Long id) throws Exception {
 		return stockInInventoryService.getById(id);
 	}
 
@@ -105,14 +105,10 @@ public class StockInInventoryController {
 	// return stockInInventoryService.getProductByInventoryId(id);
 	// }
 
-	@GetMapping("/getproduct/{id}")
-	public ResponseEntity<List<StockInInventory>> getProductItemById(@PathVariable("id") Long id) {
-		System.out.println(id);
-		return new ResponseEntity<List<StockInInventory>>(this.stockInInventoryService.getItemById(id), HttpStatus.OK);
-	}
+	
 	@GetMapping("/getProduct/approval")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public ResponseEntity<Response> getwithApproval(@RequestParam("id")Long id,@RequestParam("approval")boolean approval){
+    public ResponseEntity<Response> getwithApproval(@RequestParam("id")Long id,@RequestParam("approval")boolean approval) throws Exception{
          StockInInventory byId = this.stockInInventoryService.getById(id);
          byId.setIsApproved(approval);
 	StockInInventory stockInInventory=	this.stockInInventoryService.addOrUpdate(byId);
