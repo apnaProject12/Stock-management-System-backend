@@ -9,8 +9,5 @@ import com.psl.stock.backend.repositories.OrderInRepo;
 public class OrderInServices {
 
     @Autowired
-    private OrderInRepo orderInRepo;
-
-    
-    
+    private OrderInRepo orderInRepo;  
 }

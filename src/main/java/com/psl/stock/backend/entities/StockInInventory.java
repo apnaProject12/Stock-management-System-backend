@@ -1,9 +1,5 @@
 package com.psl.stock.backend.entities;
-
 import java.util.List;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,7 +41,17 @@ public class StockInInventory {
     @Positive(message = "total product must be greater than 0")
 	private String totalProduct;
 
+    @Positive(message = "total product must be greater than 0")
 	private String totalPrice;
+	@NotNull(message = "supplier is required")
+	private String supplier;
+	@NotNull(message = "supplyMedium is required")
+	private String supplyMedium;
+	@NotNull(message = "OrderDate is required")
+	private String orderdate;
+	@NotNull(message = "orderBy is required")
+	private String orderBy;
+
 
 	private Boolean isApproved;
 

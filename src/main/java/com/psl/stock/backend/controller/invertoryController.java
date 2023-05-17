@@ -1,10 +1,6 @@
 package com.psl.stock.backend.controller;
-
-import java.net.http.HttpRequest;
 import java.util.List;
 import java.util.Optional;
-
-// import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +29,6 @@ public class invertoryController {
 
         
         System.out.println("inventory out : "+inventory.getProductName());
-     int   count=0;
       for (Inventory element : this.inventoryService.getAllInventory()) {
         System.out.println(element.getProductName());
         if (element.getProductName().equalsIgnoreCase(inventory.getProductName())) {

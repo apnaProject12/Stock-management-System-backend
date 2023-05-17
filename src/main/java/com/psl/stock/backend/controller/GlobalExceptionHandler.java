@@ -32,6 +32,7 @@ public class GlobalExceptionHandler {
     public Map<String, String> handleAllExceptions(Exception ex) {
         Map<String, String> errors = new HashMap<>();
         errors.put("message", ex.getMessage());
+        ex.printStackTrace();
         return errors;
     }
 

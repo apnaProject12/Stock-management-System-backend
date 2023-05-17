@@ -10,9 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 //import org.springframework.web.bind.annotation.PostMapping;
@@ -84,8 +82,7 @@ public class HomeController {
 		System.out.println("THIS IS USER POST DATA IN DATABASE");
 		User findEmailpassword = this.userService.findEmail(user.getEmail());
 		if(findEmailpassword ==null) {
-			
-			User savaAll = this.userService.savaAll(user);
+        this.userService.savaAll(user);
 			Response tokenResponse=new Response("Data inserted Successfully");
 			
 			return new ResponseEntity<Response>(tokenResponse,HttpStatus.OK);
@@ -103,12 +100,8 @@ public class HomeController {
 		System.out.println("THIS IS USER POST DATA IN DATABASE");
 		Admin findEmailpassword = this.adminService.findEmailpassword(admin.getEmail(),admin.getPhone());
 		if(findEmailpassword ==null) {
-			
-			Admin savaAll = this.adminService.savaAll(admin);
-		
-			
-			Response tokenResponse=new Response("Data inserted Successfully");
-			
+        this.adminService.savaAll(admin);
+		Response tokenResponse=new Response("Data inserted Successfully");		
 			return new ResponseEntity<Response>(tokenResponse,HttpStatus.OK);
 		}
 		else {

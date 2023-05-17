@@ -52,9 +52,9 @@ public class StockInInventoryController {
 				HttpStatus.OK);
 	}
 
-	@GetMapping("/findInventoryIn/data/{id}")
-	private StockInInventory getById(@PathVariable Long id) throws Exception {
-		return stockInInventoryService.getById(id);
+	@GetMapping("/getInventoryItemById/{id}")
+	public ResponseEntity<StockInInventory> findInventoryItemById(@PathVariable("id") long id) throws Exception {
+		return new ResponseEntity<StockInInventory>(this.stockInInventoryService.findDataById(id),HttpStatus.OK);
 	}
 
 	@PostMapping("/add/inventory")
@@ -109,7 +109,7 @@ public class StockInInventoryController {
 	@GetMapping("/getProduct/approval")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Response> getwithApproval(@RequestParam("id")Long id,@RequestParam("approval")boolean approval) throws Exception{
-         StockInInventory byId = this.stockInInventoryService.getById(id);
+         StockInInventory byId = this.stockInInventoryService.findDataById(id); 
          byId.setIsApproved(approval);
 	StockInInventory stockInInventory=	this.stockInInventoryService.addOrUpdate(byId);
 	 boolean appro= stockInInventory.getIsApproved();
@@ -119,7 +119,7 @@ public class StockInInventoryController {
 			 productValue=this.stockInventoryItemService.getTotalProduct(item.getProductName());
 			Optional<Inventory> inventory= this.inventoryService.InvertoryByProductName(item.getProductName());
 			inventory.get().setProductQty(productValue);
-			this.inventoryService.updateProductQuantity(inventory);;
+			this.inventoryService.updateProductQuantity(inventory);
 			
 		   }
 

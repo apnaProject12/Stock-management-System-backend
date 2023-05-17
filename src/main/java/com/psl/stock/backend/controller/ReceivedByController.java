@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.psl.stock.backend.entities.Logistic_ReceivedBy;
+import com.psl.stock.backend.entities.Response;
 import com.psl.stock.backend.services.ReceivedByService;
 
 @RestController
@@ -27,7 +28,8 @@ public class ReceivedByController {
 
     @PostMapping("/receiver/add")
     public ResponseEntity<?> insertFromData(@RequestBody Logistic_ReceivedBy logistic_ReceivedBy) {
-        return new ResponseEntity<Logistic_ReceivedBy>(this.receivedByService.insertReceivedBy(logistic_ReceivedBy),
+        this.receivedByService.insertReceivedBy(logistic_ReceivedBy);
+        return new ResponseEntity<Response>(new Response("Receiver Name Add successfully"),
                 HttpStatus.OK);
 
     }

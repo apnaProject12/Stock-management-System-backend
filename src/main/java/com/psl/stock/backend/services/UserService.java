@@ -28,7 +28,7 @@ public class UserService {
 	}
 	
 	
-	public Optional<User> getByid(int id) {
+	public Optional<User> getById(int id) {
 		System.out.println("this is get By id");
 		return this.userRepository.findById(id);
 	}
@@ -70,6 +70,7 @@ public class UserService {
 	public Response forgetPassword(String password,Long phone,String email) throws Exception{
 	User user=this.userRepository.findByEmailAndPhone(email, phone).orElseThrow(()->new Exception("user not exist"));
 	user.setPassword(passwordEncoder.encode(password));
+	this.userRepository.save(user);
 	return new Response("password updated Successfully");
 	}
 	

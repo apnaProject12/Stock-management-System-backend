@@ -57,11 +57,6 @@ public class StockInInventoryService {
 		return stockInInventoryRepo.findAll(p);
 	}
 
-	
-	public StockInInventory getById(Long id) throws Exception {
-		return stockInInventoryRepo.findById(id).orElseThrow(()->new Exception("id not present"));
-
-	}
 
 	public List<Map<String, Object>> getProductByInventoryId(Long id) {
 
@@ -70,6 +65,9 @@ public class StockInInventoryService {
 		return jdbcTemplate.queryForList(
 				"SELECT * FROM inventory_item p JOIN `inventory_in` i ON p.`stock_id`=i.`stock_id` WHERE i.stock_id=:id",
 				_params);
+	}
+	public StockInInventory findDataById(long id) throws Exception {
+		return this.stockInInventoryRepo.findById(id).orElseThrow(()->new Exception("id not present"));
 	}
 
 	
